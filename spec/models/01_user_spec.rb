@@ -3,7 +3,7 @@
 #can not create new @user without password
 #password is hashed, not stored in plain text
 
-describe @user do
+describe User do
     def build_user(username, password)
         @user.username = "Roger Aisles" if username
         @user.password = "RA1" if password
