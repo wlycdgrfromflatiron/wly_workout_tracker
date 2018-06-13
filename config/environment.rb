@@ -10,5 +10,6 @@ ActiveRecord::Base.establish_connection(
 
 require './app/models/user.rb'
 require './app/models/workout.rb'
+require './app/models/run.rb'
 
 require './app/controllers/application_controller.rb'
