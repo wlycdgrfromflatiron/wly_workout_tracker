@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_13_052556) do
+ActiveRecord::Schema.define(version: 2018_06_13_141901) do
+
+  create_table "runs", force: :cascade do |t|
+    t.integer "tens_of_miles"
+    t.integer "milliseconds"
+    t.integer "tens_of_incline_degrees"
+    t.integer "workout_id"
+    t.index ["workout_id"], name: "index_runs_on_workout_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
