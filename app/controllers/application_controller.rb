@@ -8,4 +8,12 @@ class ApplicationController < Sinatra::Base
   get '/' do
     erb :index
   end
+
+  def logged_in?
+    !!session[:user_id]
+  end
+
+  def user
+    User.find(session[:user_id])
+  end
 end
