@@ -8,4 +8,4 @@ To try it out:
 
 Built in Sinatra for a Flatiron School project.
 
-Copyright Ilya Zarembsky 2018.
+Licensed under GNU AGPLv3.
