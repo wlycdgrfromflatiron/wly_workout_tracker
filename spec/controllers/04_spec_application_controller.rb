@@ -1,7 +1,7 @@
 describe ApplicationController do
     context 'GET /' do
         context 'logged in' do
-            it 'redirects to Workouts index'
+            it 'redirects to /users/:id'
         end
 
         context 'not logged in' do
