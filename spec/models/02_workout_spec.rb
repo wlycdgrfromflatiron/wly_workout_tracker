@@ -33,7 +33,7 @@ describe Workout do
     end
 
     it 'can not persist new workout without user' do
-        build_user(true, false)
+        build_workout(true, false)
         
         expect(@workout.save).to be false
     end
