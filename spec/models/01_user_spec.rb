@@ -38,6 +38,7 @@ describe @user do
         @user.save
 
         expect(User.find_by(username: "Roger Aisles").password).to be_nil
+        expect(User.find_by(username: "Roger Aisles").password_digest).not_to be_nil 
         expect(User.find_by(username: "Roger Aisles").password_digest).not_to eql("RA1")
     end
 end
