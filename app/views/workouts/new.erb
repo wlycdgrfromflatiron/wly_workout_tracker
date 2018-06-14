@@ -1,0 +1,13 @@
+<h1>Log a new workout, <%= user.username %></h1>
+
+<form action="/workouts" method="POST">
+    <h3>Run:</h3>
+        Distance: <input type="text" name="run[distance]">
+        Time: <input type="text" name="run[time]">
+
+    <h3>Pushups:</h3>
+        Set 1 reps: <input type="text" name="pushups[set1]">
+        Set 2 reps: <input type="text" name="pushups[set2]">
+
+    <input type="submit" value="Log Workout">
+</form>
