@@ -13,16 +13,12 @@ class WorkoutController < ApplicationController
         redirect to '/' unless logged_in?
         redirect to '/workouts' if todays_workout_already_logged?
 
-        binding.pry
-
         workout = Workout.create(
             date: Date.today,
             user: user
         )
 
         if all_required_run_info_submitted?
-            binding.pry 
-
             Run.create(
                 tens_of_miles: (params[:run][:distance]).to_f * 10,
                 milliseconds: run_milliseconds,
@@ -42,6 +38,8 @@ class WorkoutController < ApplicationController
     end
 
     get '/workouts/:id' do
+        redirect to '/' unless logged_in?
+        
         "HELLO THIS IS THE DETAILS PAGE FOR #{Workout.find(params[:id]).date}'s workout"
     end
 
