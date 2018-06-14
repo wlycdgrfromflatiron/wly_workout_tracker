@@ -12,6 +12,7 @@ require './app/models/user.rb'
 require './app/models/workout.rb'
 require './app/models/run.rb'
 
-require './app/controllers/application_controller.rb'
-require './app/controllers/account_controller.rb'
-require './app/controllers/user_controller.rb'
+["application", "account", "user", "workout"].each do |domain|
+  require "./app/controllers/#{domain}_controller.rb"
+end
+
