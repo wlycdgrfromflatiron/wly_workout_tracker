@@ -1,8 +1,13 @@
 <h1>Your previous workouts, <%= user.username %></h1>
 
+<h3><a href="/user">Home</a></h3>
+<h3><a href="/workouts/new">Log New Workout</a></h3>
+
 <% user.workouts.each do |workout| %>
     <p>
         <%= workout.date.to_s %>
         <a href="/workouts/<%= workout.id %>">edit</a>
     </p>
 <% end %>
+
+<p><a href="/logout">log out</a></p>
