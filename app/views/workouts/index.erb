@@ -4,7 +4,8 @@
 
 <% user.workouts.each do |workout| %>
     <p>
-        <%= workout.date.to_s %>
+        <%= workout.date.to_s %><br>
+        <%= "Run" if workout.run %><br>
         <a href="/workouts/<%= workout.id %>">edit</a>
     </p>
 <% end %>
