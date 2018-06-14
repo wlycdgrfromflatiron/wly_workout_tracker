@@ -41,6 +41,8 @@ class WorkoutController < ApplicationController
         redirect to '/' unless logged_in?
         redirect to '/workouts' unless workout_belongs_to_user?
 
+        @workout = Workout.find(parmas[:id])
+
         "HELLO THIS IS THE DETAILS PAGE FOR #{Workout.find(params[:id]).date}'s workout"
     end
 
@@ -62,6 +64,7 @@ class WorkoutController < ApplicationController
     end
 
     def workout_belongs_to_user?
-        user.workouts.include?(Workout.find(params[:id]))
+        # find_by returns nil, not an error, if record does not exist
+        user.workouts.include?(Workout.find_by(id: params[:id]))
     end
 end
