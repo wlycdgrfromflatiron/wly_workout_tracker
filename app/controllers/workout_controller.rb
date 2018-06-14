@@ -41,7 +41,7 @@ class WorkoutController < ApplicationController
         redirect to '/' unless logged_in?
         redirect to '/workouts' unless workout_belongs_to_user?
 
-        @workout = Workout.find(parmas[:id])
+        @workout = Workout.find(params[:id])
 
         "HELLO THIS IS THE DETAILS PAGE FOR #{Workout.find(params[:id]).date}'s workout"
     end
