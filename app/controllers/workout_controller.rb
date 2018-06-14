@@ -43,6 +43,7 @@ class WorkoutController < ApplicationController
 
         @workout = Workout.find(params[:id])
 
+        erb :'/workouts/show'
         "HELLO THIS IS THE DETAILS PAGE FOR #{Workout.find(params[:id]).date}'s workout"
     end
 
