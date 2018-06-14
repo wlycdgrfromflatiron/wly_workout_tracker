@@ -39,7 +39,8 @@ class WorkoutController < ApplicationController
 
     get '/workouts/:id' do
         redirect to '/' unless logged_in?
-        
+        redirect to '/workouts' unless workout_belongs_to_user?
+
         "HELLO THIS IS THE DETAILS PAGE FOR #{Workout.find(params[:id]).date}'s workout"
     end
 
@@ -58,5 +59,9 @@ class WorkoutController < ApplicationController
             ((params[:run][:minutes]).to_i * 60) +
             (params[:run][:seconds]).to_i
         ) * 1000
+    end
+
+    def workout_belongs_to_user?
+        user.workouts.include?(Workout.find(params[:id]))
     end
 end
