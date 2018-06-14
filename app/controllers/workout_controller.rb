@@ -60,6 +60,15 @@ class WorkoutController < ApplicationController
         "LETS EDIT THE WORKOUT FOR #{Workout.find(params[:id]).date}!"
     end 
 
+    delete '/workouts/:id/delete' do
+        redirect to '/' unless logged_in?
+        redirect to '/workouts' unless workout_belongs_to_user?
+
+        Workout.find(params[:id]).delete
+
+        redirect to '/workouts'
+    end 
+
     def todays_workout_already_logged?
         user.workouts.detect {|w| w.date == Date.today}
     end

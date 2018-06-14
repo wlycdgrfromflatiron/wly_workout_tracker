@@ -16,4 +16,11 @@
 <br>
 <br>
 
+<form action="/workouts/<%= @workout.id %>/delete" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit" id="delete_workout">Delete Workout</button>
+</form>
+
+<br>
+
 <p><a href="/workouts">Home</a> | <a href="/logout">Log out</a></p>
