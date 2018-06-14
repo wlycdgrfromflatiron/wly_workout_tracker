@@ -11,17 +11,14 @@ class WorkoutController < ApplicationController
 
     post '/workouts' do
         redirect to '/' unless logged_in?
-
-        if (todays_workout_already_exists = user.workouts.detect {|w| w.date == Date.today})
-            redirect to "workouts/#{todays_workout_already_exists.id}"
-        end
+        redirect to '/workouts' if todays_workout_already_logged?
 
         workout = Workout.create(
             date: Date.today,
             user: user
         )
 
-        redirect to '/workouts'
+        
         # make a workout with today's date
         # fail if a workout with this date already exists
 
@@ -39,7 +36,8 @@ class WorkoutController < ApplicationController
 
     get '/workouts/new' do
         redirect to '/' unless logged_in?
-        
+        redirect to '/workouts' if todays_workout_already_logged?
+
         erb :'/workouts/new'
     end
 
