@@ -1,5 +1,7 @@
 <h3><%= label %>: </h3>
 
+<p><%= error_message %></p>
+
 <form action="<%= action %>" method="POST">
     <% fields = ["username", "password"] %>
     <% fields.each do |field| %>
@@ -8,4 +10,6 @@
             <input type="text" id="<%= field %>" name="<%= field %>">
         </p>
     <% end %>
+
+    <input type="submit" value="<%= label %>">
 </form >
