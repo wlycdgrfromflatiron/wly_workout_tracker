@@ -13,24 +13,25 @@ class WorkoutController < ApplicationController
         redirect to '/' unless logged_in?
         redirect to '/workouts' if todays_workout_already_logged?
 
+        binding.pry
+
         workout = Workout.create(
             date: Date.today,
             user: user
         )
 
+        if all_required_run_info_submitted?
+            binding.pry 
+
+            Run.create(
+                tens_of_miles: (params[:run][:distance]).to_f * 10,
+                milliseconds: run_milliseconds,
+                tens_of_incline_degrees: params[:run][:incline] || 0,
+                workout: workout 
+            )
+        end
+
         redirect to '/workouts'
-
-        # make a workout with today's date
-        # fail if a workout with this date already exists
-
-        # make run, if all fields have been supplied
-
-        # attach run to workout
-
-        # redirect to workouts index, for now
-        
-
-        # make a run with 
     end
 
     get '/workouts/new' do
@@ -46,5 +47,18 @@ class WorkoutController < ApplicationController
 
     def todays_workout_already_logged?
         user.workouts.detect {|w| w.date == Date.today}
+    end
+
+    def all_required_run_info_submitted?
+        !params[:run][:distance].empty? &&
+        !params[:run][:minutes].empty? &&
+        !params[:run][:seconds].empty?
+    end
+
+    def run_milliseconds
+        (
+            ((params[:run][:minutes]).to_i * 60) +
+            (params[:run][:seconds]).to_i
+        ) * 1000
     end
 end
