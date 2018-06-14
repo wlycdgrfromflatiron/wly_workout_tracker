@@ -13,5 +13,5 @@ require './app/models/workout.rb'
 require './app/models/run.rb'
 
 require './app/controllers/application_controller.rb'
-require './app/controllers/session_controller.rb'
+require './app/controllers/accounts_controller.rb'
 require './app/controllers/user_controller.rb'

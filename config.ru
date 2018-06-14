@@ -5,6 +5,6 @@ if ActiveRecord::Migration.check_pending!
 end
 
 use Rack::MethodOverride
-use SessionController
+use AccountController
 use UserController
 run ApplicationController
