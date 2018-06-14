@@ -8,6 +8,8 @@ class AccountController < ApplicationController
     end
 
     get '/logout' do
+        session.delete(:user_id)
+        redirect to '/'
     end
 
     get '/signup' do
@@ -29,7 +31,7 @@ class AccountController < ApplicationController
 
             session[:user_id] = user.id
 
-            redirect to "/users/#{user.id}"
+            redirect to "/user"
         end
     end
 
@@ -41,7 +43,7 @@ class AccountController < ApplicationController
 
     def render_form(form_label, form_action)
         if logged_in?
-            redirect to "/users/#{session[:user_id]}"
+            redirect to "/user"
         else
             err_msg = (session.delete(:account_error)) ?
                 session.delete(:account_error_message) :
