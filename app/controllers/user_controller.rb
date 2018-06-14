@@ -4,6 +4,6 @@ class UserController < ApplicationController
 
         @user = User.find(session[:user_id])
 
-        "welcome, #{User.find(session[:user_id]).username}. the session[:user_id] value is #{session[:user_id]}."
+        erb :user
     end
 end
