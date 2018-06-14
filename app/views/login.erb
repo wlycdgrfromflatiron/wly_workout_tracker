@@ -1,0 +1,11 @@
+<h3>Login:</h3>
+
+<form action="/login" method="POST">
+    <% fields = ["username", "password"] %>
+    <% fields.each do |field| %>
+        <p>
+            <label for="<%= field %>"><%= field.capitalize%>: </label>
+            <input type="text" id="<%= field %>" name="<%= field %>">
+        </p>
+    <% end %>
+</form >

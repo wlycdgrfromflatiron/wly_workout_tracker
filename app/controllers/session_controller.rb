@@ -3,7 +3,7 @@ class SessionController < ApplicationController
         if logged_in?
             redirect to "/users/#{session[:user_id]}"
         else
-            erb :index
+            erb :login
         end
     end
 
