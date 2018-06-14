@@ -1,5 +1,5 @@
 class User < ApplicationController
     get '/users/:id' do
-        erb :'/users/show'
+        "BANANAS FOSTER user details page"
     end
 end
