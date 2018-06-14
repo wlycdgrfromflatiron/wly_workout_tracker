@@ -1,0 +1,19 @@
+<h1>Edit workout for <%= Date.today %></h1>
+
+<form action="/workouts/<%= @workout.id %>" method="POST">
+    <% if @run %>
+        <h3>Run:</h3>
+            Distance in miles: <input type="number" placeholder="2.0" step="0.1" min="0.1" name="run[distance]" value="<%= @run_miles %>"><br><br>
+            Minutes: <input type="number" placeholder="1" step="1" min="0" name="run[minutes]" value="<%= @run_minutes %>"><br><br>
+            Seconds: <input type="number" placeholder="0" step="1" min="0" max="59" name="run[seconds]" value="<%= @run_seconds %>"><br><br>
+            Incline in degrees: <input type="number" placeholder="0" step="0.5" min="0" max="15" name="run[incline]" value="<%= @run_incline %>"><br>
+    <% end %>
+
+    <br>
+
+    <input type="submit" value="Update Workout">
+</form>
+
+<br>
+
+<p><a href="/workouts">Home</a> | <a href="/logout">Log out</a></p>

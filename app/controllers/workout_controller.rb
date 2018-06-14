@@ -53,11 +53,27 @@ class WorkoutController < ApplicationController
         erb :'/workouts/show'
     end
 
+    post '/workouts/:id' do
+        redirect to '/' unless logged_in?
+        redirect_to '/workouts' unless workout_belongs_to_user?
+
+        "YOU POSTED?"
+    end
+
     get '/workouts/:id/edit' do
         redirect to '/' unless logged_in?
         redirect to '/workouts' unless workout_belongs_to_user?
 
-        "LETS EDIT THE WORKOUT FOR #{Workout.find(params[:id]).date}!"
+        @workout = Workout.find(params[:id])
+        @run = @workout.run
+        if (@run)
+            @run_miles = @run.tens_of_miles / 10
+            @run_minutes = ((@run.milliseconds / 1000) / 60).floor
+            @run_seconds = (@run.milliseconds / 1000) % 60
+            @run_incline = @run.tens_of_incline_degrees / 10
+        end
+
+        erb :'/workouts/edit'
     end 
 
     delete '/workouts/:id/delete' do
