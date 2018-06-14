@@ -4,7 +4,23 @@ class AccountController < ApplicationController
     end
 
     post '/login' do
-        
+        if (un = params[:username]).empty?
+            error_redirect("Please enter a username and try again", "/login")
+
+        elsif (pw = params[:password]).empty?
+            error_redirect("Please enter a password and try again", "/login")
+
+        elsif !(user = User.find_by(username: un))
+            error_redirect("That username does not exist, please check your spelling and try again", "/login")
+
+        elsif !(user.authenticate(pw))
+            error_redirect("Wrong password. Please check your spelling and try again", "/login")
+
+        else
+            session[:user_id] = user.id
+
+            redirect to "/user"
+        end
     end
 
     get '/logout' do
