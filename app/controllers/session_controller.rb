@@ -3,12 +3,12 @@ class SessionController < ApplicationController
         if logged_in?
             redirect to "/users/#{session[:user_id]}"
         else
-            "BANANAS FOSTER login form"
+            erb :index
         end
     end
 
     post '/login' do
-        
+
     end
 
     get '/logout' do
