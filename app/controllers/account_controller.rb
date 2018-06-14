@@ -1,6 +1,6 @@
 class AccountController < ApplicationController
     get '/login' do
-        render_form("Login", "/login")
+        render_form("Login", "/login", "Don't have an account yet? Sign up <a href='/signup'>here</a>")
     end
 
     post '/login' do
@@ -29,7 +29,7 @@ class AccountController < ApplicationController
     end
 
     get '/signup' do
-        render_form("Sign Up", "/signup")
+        render_form("Sign Up", "/signup", "Already have an account? Log in <a href='/login'>here</a>")
     end
 
     post '/signup' do
@@ -57,7 +57,7 @@ class AccountController < ApplicationController
         redirect to redirect_target
     end
 
-    def render_form(form_label, form_action)
+    def render_form(form_label, form_action, form_link)
         if logged_in?
             redirect to "/user"
         else
@@ -66,7 +66,7 @@ class AccountController < ApplicationController
                 ''
 
             erb :'accounts/signup_or_login', 
-                locals: {label: form_label, action: form_action, error_message: err_msg}
+                locals: {label: form_label, action: form_action, other_form_link: form_link, error_message: err_msg}
         end
     end
 end
