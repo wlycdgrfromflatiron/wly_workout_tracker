@@ -1,10 +1,6 @@
 class AccountController < ApplicationController
     get '/login' do
-        if logged_in?
-            redirect to "/users/#{session[:user_id]}"
-        else
-            erb :'accounts/login'
-        end
+        render_form("Login", "/login")
     end
 
     post '/login' do
@@ -14,13 +10,18 @@ class AccountController < ApplicationController
     end
 
     get '/signup' do
-        if logged_in?
-            redirect to "/users/#{session[:user_id]}"
-        else
-            erb :'accounts/signup'
-        end
+        render_form("Sign Up", "/signup")
     end
 
     post '/signup' do
+    end
+
+    def render_form(form_label, form_action)
+        if logged_in?
+            redirect to "/users/#{session[:user_id]}"
+        else
+            erb :'accounts/signup_or_login', 
+                locals: {label: form_label, action: form_action}
+        end
     end
 end
