@@ -2,7 +2,11 @@ class WorkoutController < ApplicationController
     get '/workouts' do
         redirect to '/' unless logged_in?
 
-        erb :'/workouts/index'
+        workout_message = todays_workout_already_logged? ?
+            "Good job logging today's workout. Come back tomorrow and keep the streak going." :
+            "<a href='/workouts/new'>Log Today's Workout</a>"
+
+        erb :'/workouts/index', locals: {todays_workout_message: workout_message}
     end
 
     post '/workouts' do
@@ -35,11 +39,15 @@ class WorkoutController < ApplicationController
 
     get '/workouts/new' do
         redirect to '/' unless logged_in?
-
+        
         erb :'/workouts/new'
     end
 
     get '/workouts/:id' do
         "HELLO THIS IS THE DETAILS PAGE FOR #{Workout.find(params[:id]).date}'s workout"
+    end
+
+    def todays_workout_already_logged?
+        user.workouts.detect {|w| w.date == Date.today}
     end
 end

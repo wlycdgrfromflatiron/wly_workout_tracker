@@ -1,6 +1,6 @@
 <h1>Welcome, <%= user.username %></h1>
 
-<h3><a href="/workouts/new">Log Today's Workout</a></h3>
+<h3><%= todays_workout_message %></h3>
 
 <% user.workouts.each do |workout| %>
     <p>
