@@ -18,7 +18,8 @@ class WorkoutController < ApplicationController
             user: user
         )
 
-        
+        redirect to '/workouts'
+
         # make a workout with today's date
         # fail if a workout with this date already exists
 
@@ -30,8 +31,6 @@ class WorkoutController < ApplicationController
         
 
         # make a run with 
-        binding.pry
-
     end
 
     get '/workouts/new' do
