@@ -53,6 +53,13 @@ class WorkoutController < ApplicationController
         erb :'/workouts/show'
     end
 
+    get '/workouts/:id/edit' do
+        redirect to '/' unless logged_in?
+        redirect to '/workouts' unless workout_belongs_to_user?
+
+        "LETS EDIT THE WORKOUT FOR #{Workout.find(params[:id]).date}!"
+    end 
+
     def todays_workout_already_logged?
         user.workouts.detect {|w| w.date == Date.today}
     end
