@@ -57,7 +57,17 @@ class WorkoutController < ApplicationController
         redirect to '/' unless logged_in?
         redirect_to '/workouts' unless workout_belongs_to_user?
 
-        "YOU POSTED?"
+        workout = Workout.find(params[:id])
+        run = workout.run
+
+        if run && all_required_run_info_submitted?
+            run.tens_of_miles = (params[:run][:distance]).to_f * 10
+            run.milliseconds = run_milliseconds
+            run.tens_of_incline_degrees = params[:run][:incline] || 0
+            run.save
+        end
+
+        redirect to '/workouts'
     end
 
     get '/workouts/:id/edit' do
