@@ -42,6 +42,13 @@ class WorkoutController < ApplicationController
         redirect to '/workouts' unless workout_belongs_to_user?
 
         @workout = Workout.find(params[:id])
+        @run = @workout.run
+        if (@run)
+            @run_miles = @run.tens_of_miles / 10
+            @run_minutes = ((@run.milliseconds / 1000) / 60).floor
+            @run_seconds = (@run.milliseconds / 1000) % 60
+            @run_incline = @run.tens_of_incline_degrees / 10
+        end
 
         erb :'/workouts/show'
     end

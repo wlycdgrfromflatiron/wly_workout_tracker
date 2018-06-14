@@ -1,3 +1,12 @@
 <h1><%= @workout.date %> workout</h1>
 
+<% if @run %>
+    <div class="runContainer">
+        <h3>Run</h3>
+        <p>Distance: <%= @run_miles %> miles</p>
+        <p>Time: <%= @run_minutes%>:<%= @run_seconds %></p>
+        <p>Incline: <%= @run_incline %></p>
+    </div>
+<% end %>
+
 <p><a href="/workouts">Home</a> | <a href="/logout">Log out</a></p>
