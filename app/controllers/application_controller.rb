@@ -7,7 +7,7 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     if logged_in?
-      redirect to "/user"
+      redirect to "/workouts"
     else
       erb :index
     end

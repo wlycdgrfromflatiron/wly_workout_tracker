@@ -19,7 +19,7 @@ class AccountController < ApplicationController
         else
             session[:user_id] = user.id
 
-            redirect to "/user"
+            redirect to "/workouts"
         end
     end
 
@@ -47,7 +47,7 @@ class AccountController < ApplicationController
 
             session[:user_id] = user.id
 
-            redirect to "/user"
+            redirect to "/workouts"
         end
     end
 
