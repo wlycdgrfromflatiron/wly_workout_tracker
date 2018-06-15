@@ -4,6 +4,8 @@ class AccountController < ApplicationController
     end
 
     post '/login' do
+        redirect to '/workouts' if logged_in?
+
         assert_param_presence '/login'
 
         if !(user = User.find_by(username: params[:username]))
@@ -29,6 +31,8 @@ class AccountController < ApplicationController
     end
 
     post '/signup' do
+        redirect to '/workouts' if logged_in?
+
         assert_param_presence '/signup'
 
         if User.find_by(username: params[:username])
@@ -58,15 +62,13 @@ class AccountController < ApplicationController
     end
 
     def render_form(form_label, form_action, form_link)
-        if logged_in?
-            redirect to "/user"
-        else
-            err_msg = (session.delete(:account_error)) ?
-                session.delete(:account_error_message) :
-                ''
+        redirect to '/workouts' if logged_in?
 
-            erb :'accounts/signup_or_login', 
-                locals: {label: form_label, action: form_action, other_form_link: form_link, error_message: err_msg}
-        end
+        err_msg = (session.delete(:account_error)) ?
+            session.delete(:account_error_message) :
+            ''
+
+        erb :'accounts/signup_or_login', 
+            locals: {label: form_label, action: form_action, other_form_link: form_link, error_message: err_msg}
     end
 end
