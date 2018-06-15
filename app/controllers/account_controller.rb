@@ -4,12 +4,12 @@ class AccountController < ApplicationController
     end
 
     post '/login' do
-        assert_param_prenence '/login'
+        assert_param_presence '/login'
 
-        if !(user = User.find_by(username: un))
+        if !(user = User.find_by(username: params[:username]))
             error_redirect("That username does not exist, please check your spelling and try again", "/login")
 
-        elsif !(user.authenticate(pw))
+        elsif !(user.authenticate(params[:password]))
             error_redirect("Wrong password. Please check your spelling and try again", "/login")
 
         else
@@ -31,11 +31,11 @@ class AccountController < ApplicationController
     post '/signup' do
         assert_param_presence '/signup'
 
-        if User.find_by(username: un)
+        if User.find_by(username: params[:username])
             error_redirect("That username is taken, please try again with another", "/signup")
         
         else
-            user = User.create(username: un, password: pw)
+            user = User.create(username: params[:username], password: params[:password])
 
             session[:user_id] = user.id
 
