@@ -4,13 +4,9 @@ class AccountController < ApplicationController
     end
 
     post '/login' do
-        if (un = params[:username]).empty?
-            error_redirect("Please enter a username and try again", "/login")
+        assert_param_prenence '/login'
 
-        elsif (pw = params[:password]).empty?
-            error_redirect("Please enter a password and try again", "/login")
-
-        elsif !(user = User.find_by(username: un))
+        if !(user = User.find_by(username: un))
             error_redirect("That username does not exist, please check your spelling and try again", "/login")
 
         elsif !(user.authenticate(pw))
@@ -33,13 +29,9 @@ class AccountController < ApplicationController
     end
 
     post '/signup' do
-        if (un = params[:username]).empty?
-            error_redirect("Please enter a username and try again", "/signup")
-        
-        elsif (pw = params[:password]).empty?
-            error_redirect("Please enter a password and try again", "/signup")
+        assert_param_presence '/signup'
 
-        elsif User.find_by(username: un)
+        if User.find_by(username: un)
             error_redirect("That username is taken, please try again with another", "/signup")
         
         else
@@ -48,6 +40,14 @@ class AccountController < ApplicationController
             session[:user_id] = user.id
 
             redirect to "/workouts"
+        end
+    end
+
+    def assert_param_presence(redirect_target)
+        if (un = params[:username]).empty?
+            error_redirect("Please enter a username and try again", redirect_target)
+        elsif (pw = params[:password]).empty?
+            error_redirect("Please enter a password and try again", redirect_target)
         end
     end
 
