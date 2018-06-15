@@ -7,7 +7,7 @@ Specs:
 User, Workout, Run
 - [x] Include at least one has_many relationship on your User model (x has_many y, e.g. User has_many Posts)
 User has_many Workouts
-- [s] Include at least one belongs_to relationship on another model (x belongs_to y, e.g. Post belongs_to User)
+- [x] Include at least one belongs_to relationship on another model (x belongs_to y, e.g. Post belongs_to User)
 Workout belongs_to User
 Run belongs_to Workout
 - [x] Include user accounts
