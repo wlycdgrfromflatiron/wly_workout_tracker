@@ -39,9 +39,9 @@ class AccountController < ApplicationController
             error_redirect("That username is taken, please try again with another", "/signup")
         
         else
-            user = User.create(username: params[:username], password: params[:password])
+            new_user = User.create(username: params[:username], password: params[:password])
 
-            session[:user_id] = user.id
+            session[:user_id] = new_user.id
 
             redirect to "/workouts"
         end
